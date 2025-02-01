@@ -30,3 +30,18 @@ export const userLogout = (req,res)=>{
 export const getMyProfile = (req,res)=>{
     res.status(200).json({message:"Hello",user:req.user})
 }
+
+export const getUserById=async(req,res)=>{
+    const id = req.params.id;
+    
+        const user = await User.findById(id)
+    
+        if(!user) return res.status(404).json({sucess:false,message:"invalid id"})
+        
+    
+        res.json({
+            sucess:true,
+            message:"your data",
+            user
+        })
+}
