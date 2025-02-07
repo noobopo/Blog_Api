@@ -1,5 +1,5 @@
 import express from 'express'
-import { isAuthonticated } from '../middlewares/auth.js';
+import { isAuthonticated } from '../middlewares/auth.js'
 import {createBlog,myBlog,updateBlog,deleteBlog,getAllBlogs,getBlogByid} from '../controllers/blog.js'
 
 const router = express.Router()
