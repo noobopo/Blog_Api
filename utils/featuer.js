@@ -1,11 +1,11 @@
 import jwt from 'jsonwebtoken'
-export const generateCookie = (user,res,statusCode=200,message)=>{
+export const generateCookie = (user,res,statusCode,message)=>{
     const token = jwt.sign({_id:user._id},process.env.JWT_SECRET)
-    res.status(201).cookie("token",token,{
+    res.status(statusCode).cookie("token",token,{
         httpOnly:true,
         maxAge:30*60*1000,
         samSite:process.env.NODE_ENV === "Development" ? "lax":"none",
-        secure:process.env.NODE_ENV === "Development" ? false:true
+        secure:process.env.NODE_ENV === "Development" ?false:true
 
     }).json({
         sucess:true,
