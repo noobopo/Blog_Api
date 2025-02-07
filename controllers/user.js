@@ -21,12 +21,19 @@ export const userLogin = async(req,res)=>{
     generateCookie(user,res,201,`${user.name} login succesfully!`)
 }
 //logout
-export const userLogout = (req,res)=>{
-    res.status(200).clearCookie("token").json({
-        sucess:true,
-        message:"logout Sucessfull!"
-    })
-}
+export const userLogout = (req, res) => {
+    res.status(200)
+      .clearCookie("token", {
+          httpOnly: true, 
+          secure: process.env.NODE_ENV !== "Development", 
+          sameSite: process.env.NODE_ENV === "Development" ? "lax" : "none"
+      })
+      .json({ 
+          success: true, 
+          message: "Logout Successful!" 
+      });
+};
+
 //get myprofile
 export const getMyProfile = (req,res)=>{
     res.status(200).json({message:"Hello",user:req.user})
