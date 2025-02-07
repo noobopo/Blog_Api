@@ -22,9 +22,10 @@ export const userLogin = async(req,res)=>{
 }
 //logout
 export const userLogout = (req,res)=>{
-    res.status(200).cookie("token","",{
-        expires:new Date(Date.now())
-    }).json({ sucess:true, message:"logout sucessfull",})
+    res.status(200).clearCookie("token").json({
+        sucess:true,
+        message:"logout Sucessfull!"
+    })
 }
 //get myprofile
 export const getMyProfile = (req,res)=>{
@@ -33,12 +34,8 @@ export const getMyProfile = (req,res)=>{
 
 export const getUserById=async(req,res)=>{
     const id = req.params.id;
-    
         const user = await User.findById(id)
-    
         if(!user) return res.status(404).json({sucess:false,message:"invalid id"})
-        
-    
         res.json({
             sucess:true,
             message:"your data",
